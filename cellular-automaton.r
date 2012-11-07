@@ -44,9 +44,20 @@ make-rule: funct [
 	br
 ]
 
-cellular_automaton.dll: load/library %cellular_automaton.dll
+if not exists? %library-utils.r [
+	write %library-utils.r read http://www.fm.vslib.cz/~ladislav/rebol/library-utils.r
+]
 
-cellular_automaton: make routine! [a [integer!] la [int] r [integer!] lr [int] return: [integer!]] cellular_automaton.dll "cellular_automaton"
+do %library-utils.r
+
+;OMG works in linux (lubuntu)
+
+if not exists? %cellular_automaton.so [
+	call "gcc -shared cellular_automaton.c -o cellular_automaton.so"
+]
+
+lib: load/library %cellular_automaton.so
+cellular_automaton: make routine! [a [integer!] la [int] r [integer!] lr [int] return: [integer!]] lib "cellular_automaton"
 
 cellular-automaton: funct [n][
 
@@ -110,5 +121,3 @@ DLL_EXPORT int cellular_automaton(int *a, int la, int *r, int lr) {
 
 }
 
-;OMG works in linux (lubuntu)
-;gcc -shared rebol.c -o rebol.so

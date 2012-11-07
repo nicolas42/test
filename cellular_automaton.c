@@ -1,9 +1,11 @@
 
 
-#include <windows.h> 
-#define DLL_EXPORT __declspec(dllexport)  
+//#include <windows.h> 
+//#define DLL_EXPORT __declspec(dllexport)  
 
-DLL_EXPORT int cellular_automaton(int *a, int la, int *r, int lr) {
+//DLL_EXPORT 
+
+int cellular_automaton(int *a, int la, int *r, int lr) {
 	
 	//100 011 010 001
 //	int r[] = {0x00000000,0x00ffffff,0x00ffffff,    0x00ffffff,0x00000000,0x00000000,   0x00ffffff,0x00000000,0x00ffffff,   0x00ffffff,0x00ffffff,0x00000000}; 
